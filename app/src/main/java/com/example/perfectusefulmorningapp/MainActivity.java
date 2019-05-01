@@ -34,6 +34,13 @@ import java.util.Calendar;
     궁극적으로 추가할 점
                 :알람마다 설정 가능해야함 : 날씨 / 미세먼지 / 구글메일 / 메모 Main과 Alarm둘다
                 :알람 끌 때 게임 활용(게임 알고리즘만 만들면 취소 버튼 대신에 넣으면 됨)
+
+
+    2019_5_1 조완식
+        뭐뭐수정한지
+        추가할점
+        궁국적으로 더 해야할점
+
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener{
 //View.OnClickListener : 화면 하단 버튼 눌렀을떄
