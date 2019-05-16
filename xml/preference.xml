@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="알람음 설정">
+        <SwitchPreference
+            android:key="weather_music"
+            android:title="날씨에 맞춰 음악틀기"/>
+
+        <ListPreference
+            android:entries="@array/array_voice"
+            android:entryValues="@array/array_voice"
+            android:key="sound_alarm"
+            android:summary="Basic Ring"
+            android:title="알림음"
+            />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="메인 화면정보">
+        <SwitchPreference
+            android:key="puzzle_alarm"
+            android:title="퍼즐로 알람 끄기"/>
+
+        <PreferenceScreen
+            android:key="puzzle_tutorial"
+            android:title="퍼즐 듀토리얼">
+
+            <ListPreference
+                android:key="tutorial_picture"
+                android:title="조합 규칙"/>
+
+            <ListPreference
+                android:key="tutorial_picture"
+                android:title="결 규칙"/>
+
+            <ListPreference
+                android:key="tutorial_picture"
+                android:title="합 규칙"/>
+
+        </PreferenceScreen>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="결과 화면">
+        <SwitchPreference
+            android:key="news"
+            android:title="뉴스 보이기"/>
+
+        <SwitchPreference
+            android:key="weather"
+            android:title="날씨 보이기"/>
+
+        <SwitchPreference
+            android:key="dust"
+            android:title="미세먼지 보이기"/>
+
+        <SwitchPreference
+            android:key="email"
+            android:title="이메일 보이기"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="추가 설정">
+
+        <ListPreference
+            android:key="tutorial_picture"
+            android:title="메모 등록"/>
+
+        <ListPreference
+            android:key="tutorial_picture"
+            android:title="구글메일 연동"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
