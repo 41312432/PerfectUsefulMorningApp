@@ -1,20 +1,24 @@
+
 package com.example.perfectusefulmorningapp;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.TimePicker;
+
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /*
@@ -40,6 +44,13 @@ import java.util.Calendar;
         추가할점
         궁국적으로 더 해야할점
 
+        2019_5_12 김준성
+        fabtn 버튼 삭제
+        textView -> button 으로 변경
+        button을 눌렀을 때, timetable이 나오지 않고
+        옵션 list가 나오도록 함. (preference view)
+
+
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener{
 //View.OnClickListener : 화면 하단 버튼 눌렀을떄
@@ -56,17 +67,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Intent aIntent;
     PendingIntent alarmIntent;  //실제 알람 의뢰
 
+    @Override
+    public SharedPreferences getSharedPreferences(String name, int mode) {
+        return super.getSharedPreferences(name, mode);
+    }
+
     boolean isClick;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //setContentView(R.layout.activity_setting);
 
         //뷰들의 객체얻기
-        fabtn = (FloatingActionButton)findViewById(R.id.mission1_fab);
-        timeView = (TextView)findViewById(R.id.mission1_time);
-        aSwitch = (Switch)findViewById(R.id.mission1_switch);
+        timeView = (Button)findViewById(R.id.button1);
+        aSwitch = (Switch)findViewById(R.id.switch1);
 
         //알람매니저 객체
         alarm = (AlarmManager)getSystemService(ALARM_SERVICE);
@@ -86,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int minute = prefs.getInt("minute",-1);
         boolean enable = prefs.getBoolean("enable",false);
 
+
         //지금 시간으로 시간으로 셋팅
         if(hour > -1 && minute > -1){
             Calendar calendar = Calendar.getInstance();
@@ -94,22 +111,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
             timeView.setText(sdf.format(calendar.getTime()));
         }
+
         //스위치도 온으로 셋팅
         if(enable){
             aSwitch.setChecked(true);
         }
 
+        // 리사이클러뷰에 표시할 데이터 리스트 생성.
+        ArrayList<String> list = new ArrayList<>();
+        for (int i=0; i<100; i++) {
+            list.add(String.format("TEXT %d", i)) ;
+        }
         //버튼이랑 스위치 리스너
-        fabtn.setOnClickListener(this);
+        timeView.setOnClickListener(this);
         aSwitch.setOnCheckedChangeListener(this);
+
     }
 
     @Override
     public void onClick(View v) {
+
+
+
         //현재시간 C
         final Calendar c=Calendar.getInstance();
         int currentHour=c.get(Calendar.HOUR_OF_DAY);
         int currentMinute=c.get(Calendar.MINUTE);
+
+        Intent intent = new Intent(getApplicationContext(),MainMenuActivity.class);
+        startActivityForResult(intent,1001);;
+
+
+    /*
+
 
         //시간설정 타임피커로 현재시간 얻음
         final TimePickerDialog timeDialog=new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
@@ -143,7 +177,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }, currentHour, currentMinute, false);
         timeDialog.show();
+*/
     }
+
 
 
     @Override
@@ -178,4 +214,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
     }
+
 }
