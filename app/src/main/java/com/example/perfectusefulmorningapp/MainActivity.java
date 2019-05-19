@@ -192,6 +192,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        menuButton3.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),MainMenuActivity.class);
+                startActivityForResult(intent,1001);
+            }
+        });
+
+        menuButton4.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),MainMenuActivity.class);
+                startActivityForResult(intent,1001);
+            }
+        });
+
+        menuButton5.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),MainMenuActivity.class);
+                startActivityForResult(intent,1001);
+            }
+        });
+
+        menuButton6.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),MainMenuActivity.class);
+                startActivityForResult(intent,1001);
+            }
+        });
+
+        menuButton7.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),MainMenuActivity.class);
+                startActivityForResult(intent,1001);
+            }
+        });
+
         timeView.setOnClickListener(this);
         timeView2.setOnClickListener(this);
         timeView3.setOnClickListener(this);
