@@ -194,9 +194,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         timeView.setOnClickListener(this);
         timeView2.setOnClickListener(this);
+        timeView3.setOnClickListener(this);
+        timeView4.setOnClickListener(this);
+        timeView5.setOnClickListener(this);
+        timeView6.setOnClickListener(this);
+        timeView7.setOnClickListener(this);
 
         aSwitch.setOnCheckedChangeListener(this);
         aSwitch2.setOnCheckedChangeListener(this);
+        aSwitch3.setOnCheckedChangeListener(this);
+        aSwitch4.setOnCheckedChangeListener(this);
+        aSwitch5.setOnCheckedChangeListener(this);
+        aSwitch6.setOnCheckedChangeListener(this);
+        aSwitch7.setOnCheckedChangeListener(this);
 
     }
 
