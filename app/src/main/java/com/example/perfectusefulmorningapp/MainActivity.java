@@ -59,13 +59,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //RadioGroup:CheckBox 버튼 눌렀을때
 
     FloatingActionButton fabtn; //알람설정버튼
+
+    TextView setTimeview;
+    Switch setSwitch;
+
     TextView timeView;  //알람시간
+    TextView timeView2;
+    TextView timeView3;
+    TextView timeView4;
+    TextView timeView5;
+    TextView timeView6;
+    TextView timeView7;
+
     Switch aSwitch;     //스위치
+    Switch aSwitch2;
+    Switch aSwitch3;
+    Switch aSwitch4;
+    Switch aSwitch5;
+    Switch aSwitch6;
+    Switch aSwitch7;
+
     Button menuButton;
+    Button menuButton2;
+    Button menuButton3;
+    Button menuButton4;
+    Button menuButton5;
+    Button menuButton6;
+    Button menuButton7;
 
     SharedPreferences prefs;    //알람시간 설정 저장
 
     AlarmManager alarm;         //알람매니저
+
     PendingIntent preIntent;    //실제 알람 1분전 의뢰
     Intent aIntent;
     PendingIntent alarmIntent;  //실제 알람 의뢰
@@ -85,8 +110,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //뷰들의 객체얻기
         timeView = (Button)findViewById(R.id.button1);
+        timeView2 = (Button)findViewById(R.id.button2);
+        timeView3 = (Button)findViewById(R.id.button3);
+        timeView4 = (Button)findViewById(R.id.button4);
+        timeView5 = (Button)findViewById(R.id.button5);
+        timeView6 = (Button)findViewById(R.id.button6);
+        timeView7 = (Button)findViewById(R.id.button7);
+
         aSwitch = (Switch)findViewById(R.id.switch1);
+        aSwitch2 = (Switch)findViewById(R.id.switch2);
+        aSwitch3 = (Switch)findViewById(R.id.switch3);
+        aSwitch4 = (Switch)findViewById(R.id.switch4);
+        aSwitch5 = (Switch)findViewById(R.id.switch5);
+        aSwitch6 = (Switch)findViewById(R.id.switch6);
+        aSwitch7 = (Switch)findViewById(R.id.switch7);
+
         menuButton = (Button)findViewById(R.id.menubutton1);
+        menuButton2 = (Button)findViewById(R.id.menubutton2);
+        menuButton3 = (Button)findViewById(R.id.menubutton3);
+        menuButton4 = (Button)findViewById(R.id.menubutton4);
+        menuButton5 = (Button)findViewById(R.id.menubutton5);
+        menuButton6 = (Button)findViewById(R.id.menubutton6);
+        menuButton7 = (Button)findViewById(R.id.menubutton7);
+
+
 
         //알람매니저 객체
         alarm = (AlarmManager)getSystemService(ALARM_SERVICE);
@@ -126,6 +173,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         for (int i=0; i<100; i++) {
             list.add(String.format("TEXT %d", i)) ;
         }
+
+
         //버튼이랑 스위치 리스너
         menuButton.setOnClickListener(new Button.OnClickListener(){
             @Override
@@ -134,8 +183,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivityForResult(intent,1001);
             }
         });
+
+        menuButton2.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),MainMenuActivity.class);
+                startActivityForResult(intent,1001);
+            }
+        });
+
         timeView.setOnClickListener(this);
+        timeView2.setOnClickListener(this);
+
         aSwitch.setOnCheckedChangeListener(this);
+        aSwitch2.setOnCheckedChangeListener(this);
 
     }
 
@@ -146,6 +207,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         final Calendar c=Calendar.getInstance();
         int currentHour=c.get(Calendar.HOUR_OF_DAY);
         int currentMinute=c.get(Calendar.MINUTE);
+
+        if(v == timeView) {
+            setTimeview = timeView;
+            setSwitch = aSwitch;
+        }else if(v == timeView2) {
+            setTimeview = timeView2;
+            setSwitch = aSwitch2;
+        }else if(v == timeView3) {
+            setTimeview = timeView3;
+            setSwitch = aSwitch3;
+        }else if(v == timeView4) {
+            setTimeview = timeView4;
+            setSwitch = aSwitch4;
+        }else if(v == timeView5) {
+            setTimeview = timeView5;
+            setSwitch = aSwitch5;
+        }else if(v == timeView6) {
+            setTimeview = timeView6;
+            setSwitch = aSwitch6;
+        }else if(v == timeView7) {
+            setTimeview = timeView7;
+            setSwitch = aSwitch7;
+        }
 
         //시간설정 타임피커로 현재시간 얻음
         final TimePickerDialog timeDialog=new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
@@ -167,8 +251,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 //새로운 시간 화면에 출력
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-                timeView.setText(sdf.format(calendar.getTime()));
-                aSwitch.setChecked(true);
+                setTimeview.setText(sdf.format(calendar.getTime()));
+                setSwitch.setChecked(true);
 
                 //알람매니저로 미리알람/진짜알람 등록 aintent한테 현재 시간 줌
                 aIntent.putExtra("time", sdf.format(calendar.getTime()));
