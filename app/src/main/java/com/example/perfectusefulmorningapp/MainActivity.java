@@ -3,6 +3,7 @@ package com.example.perfectusefulmorningapp;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -59,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     FloatingActionButton fabtn; //알람설정버튼
     TextView timeView;  //알람시간
     Switch aSwitch;     //스위치
+    Button menuButton;
 
     SharedPreferences prefs;    //알람시간 설정 저장
 
@@ -83,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //뷰들의 객체얻기
         timeView = (Button)findViewById(R.id.button1);
         aSwitch = (Switch)findViewById(R.id.switch1);
+        menuButton = (Button)findViewById(R.id.menubutton1);
 
         //알람매니저 객체
         alarm = (AlarmManager)getSystemService(ALARM_SERVICE);
@@ -123,6 +127,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             list.add(String.format("TEXT %d", i)) ;
         }
         //버튼이랑 스위치 리스너
+        menuButton.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),MainMenuActivity.class);
+                startActivityForResult(intent,1001);
+            }
+        });
         timeView.setOnClickListener(this);
         aSwitch.setOnCheckedChangeListener(this);
 
@@ -131,19 +142,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
 
-
-
         //현재시간 C
         final Calendar c=Calendar.getInstance();
         int currentHour=c.get(Calendar.HOUR_OF_DAY);
         int currentMinute=c.get(Calendar.MINUTE);
-
-        Intent intent = new Intent(getApplicationContext(),MainMenuActivity.class);
-        startActivityForResult(intent,1001);;
-
-
-    /*
-
 
         //시간설정 타임피커로 현재시간 얻음
         final TimePickerDialog timeDialog=new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
@@ -177,10 +179,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }, currentHour, currentMinute, false);
         timeDialog.show();
-*/
+
+
     }
-
-
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
